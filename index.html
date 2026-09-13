@@ -4,632 +4,303 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For You ❤️</title>
+<title>Love Story Maker ❤️</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-    font-family: Georgia, "Times New Roman", serif;
-    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff7fa);
-    color: #4a2632;
-    min-height: 100vh;
-    overflow-x: hidden;
+body{
+  font-family:Georgia,serif;
+  background:linear-gradient(135deg,#fff1f5,#ffe0ea,#fff);
+  color:#5a2635;
+  min-height:100vh;
+  padding:25px 15px;
 }
 
-.container {
-    width: 92%;
-    max-width: 850px;
-    margin: auto;
+.container{
+  width:min(700px,100%);
+  margin:auto;
 }
 
-/* Floating hearts */
-.heart {
-    position: fixed;
-    bottom: -30px;
-    font-size: 20px;
-    opacity: 0.6;
-    animation: float 8s linear infinite;
-    pointer-events: none;
+.card{
+  background:rgba(255,255,255,.9);
+  border-radius:28px;
+  padding:30px 22px;
+  margin:20px 0;
+  box-shadow:0 15px 50px rgba(100,30,60,.15);
 }
 
-.heart:nth-child(1) { left: 10%; animation-delay: 0s; }
-.heart:nth-child(2) { left: 30%; animation-delay: 2s; }
-.heart:nth-child(3) { left: 55%; animation-delay: 4s; }
-.heart:nth-child(4) { left: 80%; animation-delay: 1s; }
-
-@keyframes float {
-    from {
-        transform: translateY(0) rotate(0deg);
-    }
-    to {
-        transform: translateY(-110vh) rotate(360deg);
-    }
+.logo{
+  text-align:center;
+  font-size:55px;
+  margin-bottom:10px;
 }
 
-/* Hero */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+h1{
+  text-align:center;
+  font-size:38px;
+  margin-bottom:12px;
 }
 
-.hero-card {
-    background: rgba(255,255,255,0.72);
-    backdrop-filter: blur(12px);
-    padding: 45px 25px;
-    border-radius: 30px;
-    box-shadow: 0 15px 50px rgba(120, 50, 80, 0.15);
-    width: 100%;
+h2{
+  font-size:25px;
+  margin-bottom:10px;
 }
 
-.small {
-    font-size: 15px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-    opacity: 0.7;
+.subtitle{
+  text-align:center;
+  line-height:1.7;
+  color:#76505c;
+  margin-bottom:25px;
 }
 
-h1 {
-    font-size: clamp(42px, 9vw, 78px);
-    color: #b8325b;
-    margin-bottom: 15px;
+label{
+  display:block;
+  font-weight:bold;
+  margin:20px 0 8px;
 }
 
-.subtitle {
-    font-size: 20px;
-    line-height: 1.7;
+input,
+textarea,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #e8bccb;
+  border-radius:15px;
+  font-size:16px;
+  font-family:inherit;
+  background:#fffafd;
+  outline:none;
 }
 
-.scroll {
-    margin-top: 35px;
-    opacity: 0.6;
+textarea{
+  min-height:130px;
+  resize:vertical;
 }
 
-/* Sections */
-section {
-    padding: 70px 0;
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#d94b76;
 }
 
-.section-title {
-    text-align: center;
-    font-size: 34px;
-    color: #a92d53;
-    margin-bottom: 30px;
+.option-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-/* Letter */
-.letter {
-    background: #fffdf8;
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 10px 35px rgba(80,30,50,0.12);
-    line-height: 1.9;
-    font-size: 18px;
-    position: relative;
+.option{
+  border:2px solid #f0ccd7;
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+  cursor:pointer;
+  background:#fff;
 }
 
-.letter::before {
-    content: "♥";
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: #e89ab1;
-    font-size: 28px;
+.option input{
+  display:none;
 }
 
-/* Photos */
-.photo-box {
-    background: rgba(255,255,255,0.7);
-    padding: 25px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 10px 35px rgba(80,30,50,0.1);
+.option.selected{
+  border-color:#d94b76;
+  background:#fff0f5;
 }
 
-input[type="file"] {
-    margin: 15px 0;
-    max-width: 100%;
+button{
+  width:100%;
+  border:0;
+  border-radius:30px;
+  padding:15px;
+  margin-top:25px;
+  background:#d94b76;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(217,75,118,.25);
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+button:hover{
+  transform:translateY(-1px);
 }
 
-.gallery img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    border-radius: 18px;
-    box-shadow: 0 5px 18px rgba(80,30,50,0.15);
-    transition: transform 0.3s;
+.counter{
+  text-align:right;
+  font-size:13px;
+  margin-top:5px;
+  color:#9b6675;
 }
 
-.gallery img:hover {
-    transform: scale(1.04);
+.preview{
+  display:none;
+  text-align:center;
 }
 
-/* Voice */
-.voice-card {
-    background: rgba(255,255,255,0.75);
-    padding: 30px 20px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 10px 35px rgba(80,30,50,0.1);
+.preview-name{
+  font-size:42px;
+  color:#d94b76;
+  margin:15px 0;
 }
 
-.record-button {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: none;
-    background: #c93661;
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(201,54,97,0.35);
-    transition: 0.3s;
+.success{
+  background:#fff0f5;
+  border-radius:18px;
+  padding:20px;
+  margin-top:20px;
+  line-height:1.7;
 }
 
-.record-button:hover {
-    transform: scale(1.08);
+.hidden{
+  display:none;
 }
 
-.recording {
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(201,54,97,0.5); }
-    70% { box-shadow: 0 0 0 25px rgba(201,54,97,0); }
-    100% { box-shadow: 0 0 0 0 rgba(201,54,97,0); }
-}
-
-#recordStatus {
-    margin: 18px 0;
-    font-size: 16px;
-}
-
-audio {
-    width: 100%;
-    margin-top: 15px;
-}
-
-/* Buttons */
-.button {
-    border: none;
-    background: #b8325b;
-    color: white;
-    padding: 13px 25px;
-    border-radius: 30px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-.button:hover {
-    background: #922545;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 50px 20px;
-    color: #8c5365;
-}
-
-.big-heart {
-    font-size: 50px;
-    margin-bottom: 15px;
-}
-
-@media(max-width: 600px) {
-    .letter {
-        padding: 25px 20px;
-        font-size: 16px;
-    }
-
-    .gallery img {
-        height: 160px;
-    }
+@media(max-width:500px){
+  h1{font-size:30px}
+  .option-box{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Floating hearts -->
-<div class="heart">❤️</div>
-<div class="heart">💗</div>
-<div class="heart">💕</div>
-<div class="heart">💖</div>
+<div class="container">
 
-<!-- Hero -->
-<header class="hero">
-    <div class="container">
-        <div class="hero-card">
-            <div class="small">A little something for you</div>
+  <!-- SETUP PAGE -->
 
-            <h1>For You ❤️</h1>
+  <div id="setup">
 
-            <p class="subtitle">
-                Some feelings are easier to show<br>
-                than to say.
-            </p>
+    <div class="card">
 
-            <div class="scroll">
-                ↓ Scroll down ↓
-            </div>
-        </div>
-    </div>
-</header>
+      <div class="logo">💌</div>
+
+      <h1>Create Your Love Story</h1>
+
+      <p class="subtitle">
+        Make a little surprise for the person you love.
+        Fill in the details below and we'll personalize
+        the whole experience for you. ❤️
+      </p>
 
 
-<!-- Letter -->
-<section>
-    <div class="container">
+      <h2>1. Tum kaun ho?</h2>
 
-        <h2 class="section-title">A Little Letter 💌</h2>
+      <div class="option-box">
 
-        <div class="letter">
-            <p>
-                Dear You,
-            </p>
+        <label class="option" id="maleBox">
+          <input type="radio"
+                 name="senderGender"
+                 value="male"
+                 onchange="selectOption('male')">
+          👨 Male
+        </label>
 
-            <br>
+        <label class="option" id="femaleBox">
+          <input type="radio"
+                 name="senderGender"
+                 value="female"
+                 onchange="selectOption('female')">
+          👩 Female
+        </label>
 
-            <p>
-                I don't know if words can ever explain everything
-                properly, but I wanted to create something that
-                could hold a few of those feelings.
-            </p>
-
-            <br>
-
-            <p>
-                Every picture, every memory and every little moment
-                has its own story.
-            </p>
-
-            <br>
-
-            <p>
-                So this little page is just for you. ❤️
-            </p>
-
-            <br>
-
-            <p>
-                — From someone who cares about you
-            </p>
-        </div>
-
-    </div>
-</section>
+      </div>
 
 
-<!-- Photos -->
-<section>
-    <div class="container">
+      <label>2. Kisko bhejna hai?</label>
 
-        <h2 class="section-title">Our Memories 📸</h2>
+      <select id="relationship" onchange="updateRelationship()">
 
-        <div class="photo-box">
+        <option value="">Select relationship</option>
 
-            <p>
-                Choose your photos and they'll appear here.
-            </p>
+        <option value="girlfriend">
+          Girlfriend
+        </option>
 
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                multiple
-            >
+        <option value="boyfriend">
+          Boyfriend
+        </option>
 
-            <div class="gallery" id="gallery"></div>
+        <option value="wife">
+          Wife
+        </option>
 
-        </div>
+        <option value="husband">
+          Husband
+        </option>
 
-    </div>
-</section>
+      </select>
 
 
-<!-- Voice Recorder -->
-<section>
-    <div class="container">
+      <label>3. Uska naam kya hai?</label>
 
-        <h2 class="section-title">Say Something 🎙️</h2>
+      <input
+        id="name"
+        type="text"
+        placeholder="Example: Kavya"
+        maxlength="40"
+      >
 
-        <div class="voice-card">
 
-            <p>
-                Record a little voice message.
-            </p>
+      <label>
+        4. Jo tum kehna chahte ho,
+        par bol nahi pa rahe... ❤️
+      </label>
 
-            <br>
+      <textarea
+        id="message"
+        maxlength="100"
+        placeholder="Apne dil ki baat likho..."
+        oninput="countWords(this)"
+      ></textarea>
 
-            <button
-                class="record-button"
-                id="recordButton"
-                onclick="toggleRecording()"
-            >
-                🎙️
-            </button>
+      <div class="counter">
+        <span id="wordCount">0</span>/100 words
+      </div>
 
-            <p id="recordStatus">
-                Tap the microphone to start recording
-            </p>
 
-            <audio
-                id="audioPlayer"
-                controls
-                style="display:none;"
-            ></audio>
+      <label>
+        5. Tum usse kyun pyaar karte ho? ❤️
+      </label>
 
-            <br>
+      <textarea
+        id="whyLove"
+        placeholder="Uski kaunsi baat tumhe sabse zyada pasand hai?"
+      ></textarea>
 
-            <button
-                class="button"
-                id="shareButton"
-                style="display:none;"
-                onclick="shareRecording()"
-            >
-                📤 Share Voice Message
-            </button>
 
-        </div>
+      <label>
+        6. Woh tumhari favourite person kyun hai? 🥰
+      </label>
+
+      <textarea
+        id="favourite"
+        placeholder="Uske baare me jo tumhe sabse special lagta hai..."
+      ></textarea>
+
+
+      <label>
+        7. Ek secret message 💕
+      </label>
+
+      <textarea
+        id="secret"
+        placeholder="Jo sirf uske liye hai..."
+      ></textarea>
+
+
+      <button onclick="createPreview()">
+        Create My Love Story ❤️
+      </button>
 
     </div>
-</section>
 
+  </div>
 
-<!-- Ending -->
-<section>
-    <div class="container">
 
-        <div class="hero-card" style="text-align:center;">
+  <!-- PREVIEW -->
 
-            <div class="big-heart">❤️</div>
-
-            <h2 style="color:#b8325b;">
-                That's not all...
-            </h2>
-
-            <p style="margin-top:15px; line-height:1.8;">
-                There are still many things I want to say,
-                many memories to make,
-                and many moments to keep.
-            </p>
-
-        </div>
-
-    </div>
-</section>
-
-
-<footer>
-    Made with ❤️
-</footer>
-
-
-<script>
-
-/* -------------------------
-   PHOTO GALLERY
-------------------------- */
-
-const photoInput = document.getElementById("photoInput");
-const gallery = document.getElementById("gallery");
-
-photoInput.addEventListener("change", function() {
-
-    gallery.innerHTML = "";
-
-    const files = Array.from(this.files);
-
-    files.forEach(file => {
-
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-
-            const img = document.createElement("img");
-
-            img.src = e.target.result;
-
-            gallery.appendChild(img);
-
-        };
-
-        reader.readAsDataURL(file);
-
-    });
-
-});
-
-
-/* -------------------------
-   VOICE RECORDER
-------------------------- */
-
-let mediaRecorder;
-let audioChunks = [];
-let audioBlob;
-
-const recordButton =
-    document.getElementById("recordButton");
-
-const recordStatus =
-    document.getElementById("recordStatus");
-
-const audioPlayer =
-    document.getElementById("audioPlayer");
-
-const shareButton =
-    document.getElementById("shareButton");
-
-
-async function toggleRecording() {
-
-    if (mediaRecorder &&
-        mediaRecorder.state === "recording") {
-
-        mediaRecorder.stop();
-
-        recordButton.classList.remove("recording");
-
-        recordStatus.innerText =
-            "Recording stopped ❤️";
-
-        return;
-    }
-
-
-    try {
-
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                audio: true
-            });
-
-        audioChunks = [];
-
-        mediaRecorder =
-            new MediaRecorder(stream);
-
-
-        mediaRecorder.ondataavailable =
-            event => {
-
-                if (event.data.size > 0) {
-                    audioChunks.push(event.data);
-                }
-
-            };
-
-
-        mediaRecorder.onstop = () => {
-
-            audioBlob =
-                new Blob(audioChunks, {
-                    type: "audio/webm"
-                });
-
-            const audioURL =
-                URL.createObjectURL(audioBlob);
-
-            audioPlayer.src = audioURL;
-
-            audioPlayer.style.display = "block";
-
-            shareButton.style.display = "inline-block";
-
-            stream.getTracks().forEach(
-                track => track.stop()
-            );
-
-        };
-
-
-        mediaRecorder.start();
-
-        recordButton.classList.add("recording");
-
-        recordStatus.innerText =
-            "Recording... tap again to stop ❤️";
-
-    }
-
-    catch(error) {
-
-        recordStatus.innerText =
-            "Microphone permission is required.";
-
-    }
-
-}
-
-
-/* -------------------------
-   SHARE RECORDING
-------------------------- */
-
-async function shareRecording() {
-
-    if (!audioBlob) {
-        return;
-    }
-
-    const file =
-        new File(
-            [audioBlob],
-            "voice-message.webm",
-            {
-                type: "audio/webm"
-            }
-        );
-
-
-    if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-    ) {
-
-        try {
-
-            await navigator.share({
-                title: "A voice message ❤️",
-                text: "A little voice message for you ❤️",
-                files: [file]
-            });
-
-        }
-
-        catch(error) {
-
-            console.log("Share cancelled.");
-
-        }
-
-    }
-
-    else {
-
-        const url =
-            URL.createObjectURL(audioBlob);
-
-        const a =
-            document.createElement("a");
-
-        a.href = url;
-
-        a.download = "voice-message.webm";
-
-        a.click();
-
-        URL.revokeObjectURL(url);
-
-        alert(
-            "Your browser doesn't support direct sharing. The voice message has been saved."
-        );
-
-    }
-
-}
-
-</script>
-
-</body>
-</html>
+  <div id="
